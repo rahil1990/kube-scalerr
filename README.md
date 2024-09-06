@@ -1,22 +1,31 @@
 # kube-scalerr
-Kubernetes workload scaler
+Kubernetes workload scaleing controller
 
-his is an open-source Kubernetes controller that automatically scales Deployments and StatefulSets based on custom annotations in the workloads. The controller periodically checks for annotations that specify scale-up and scale-down times, and adjusts replicas accordingly.
+This is an open-source Kubernetes controller that automatically scales Deployments and StatefulSets based on custom annotations in the workloads. The controller periodically checks for annotations that specify scale-up and scale-down times, and adjusts replicas accordingly.
 
-Features
-Automatic Scaling: Supports scaling up and down based on annotations in Deployments and StatefulSets.
-Custom Scaling Schedules: Use custom annotations like scaleup_time and scaledown_time to define when to scale resources.
-Weekend Scaling Support: Optionally skip scaling on weekends using the weekend_scaleup annotation.
-Concurrent Processing: Uses multi-threading to efficiently process workloads and scale them concurrently.
-Configurable via Environment Variables: Control polling intervals, execution intervals, number of threads, and namespaces to exclude through environment variables.
-Retry Logic: Retries scaling operations in case of API failures.
-CSV-Based Tracking: Tracks scaling operations and stores relevant information in a CSV file for easy reference.
-How It Works
-The controller runs two primary loops:
+## Features
 
-Polling Loop: Fetches all Deployments and StatefulSets in the cluster and checks their annotations. If a workload has scaleup_time, scaleup_replicas, scaledown_time, or scaledown_replicas annotations, it logs the information and writes it to a CSV file for later use.
+| Feature                                  | Description                                                                                     |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **Automatic Scaling**                    | Supports scaling up and down based on annotations in `Deployments` and `StatefulSets`.           |
+| **Custom Scaling Schedules**             | Use annotations like `scaleup_time` and `scaledown_time` to define when to scale resources.      |
+| **Weekend Scaling Support**              | Optionally skip scaling on weekends using the `weekend_scaleup` annotation.                     |
+| **Concurrent Processing**                | Uses multi-threading to efficiently process and scale workloads concurrently.                   |
+| **Configurable via Environment Variables**| Control polling intervals, execution intervals, thread counts, and excluded namespaces.          |
+| **Retry Logic**                          | Automatically retries scaling operations if API calls fail.                                      |
+| **CSV-Based Tracking**                   | Tracks scaling operations and stores relevant information in a CSV file for reference.           |
 
-Scaling Loop: Every minute, the controller checks the CSV file for workloads scheduled to scale at the current time and performs scaling operations accordingly.
+
+## How It Works
+
+- **Polling Loop**: Periodically fetches all `Deployments` and `StatefulSets` in the cluster and checks their annotations.
+- **Annotation Check**: Checks for annotations like `scaleup_time`, `scaleup_replicas`, `scaledown_time`, and `scaledown_replicas`.
+- **CSV Logging**: Logs relevant information from workloads and stores it in a CSV file for later reference.
+- **Scaling Loop**: Every minute, checks the CSV file for workloads scheduled to scale and performs the scaling operation.
+- **Concurrent Scaling**: Utilizes multi-threading to scale multiple workloads concurrently based on the schedule.
+
+
+
 
 ## Custom Annotations
 
@@ -32,6 +41,7 @@ Workloads can be annotated with the following keys:
 | `fixed_scaleup`       | If defined, overrides `scaleup_replicas` with this fixed value.                                |
 
 
+
 ## Environment Variables
 
 | Variable           | Default | Description                                                                 |
@@ -43,4 +53,7 @@ Workloads can be annotated with the following keys:
 | `EXCLUDE_NAMESPACES`| (empty) | Comma-separated list of namespaces to exclude from processing.              |
 
 
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for more details.
 
