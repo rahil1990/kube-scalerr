@@ -27,11 +27,16 @@ scaledown_time: The time in UTC when the resource should be scaled down. Format:
 scaledown_replicas: The number of replicas to scale down to at the specified scaledown_time.
 weekend_scaleup: Set to on or off to enable or disable scaling on weekends (default: off).
 fixed_scaleup: If defined, overrides scaleup_replicas with this fixed value.
-Environment Variables
-Variable	Default	Description
-POLL_INTERVAL	60	The polling interval in minutes.
-EXEC_INTERVAL	1	The execution interval in minutes.
-POLL_THREADS	4	Number of threads for polling annotations.
-EXEC_THREADS	10	Number of threads for executing scaling operations.
-EXCLUDE_NAMESPACES	(empty)	Comma-separated list of namespaces to exclude from processing.
+
+## Environment Variables
+
+| Variable           | Default | Description                                                                 |
+| ------------------ | ------- | --------------------------------------------------------------------------- |
+| `POLL_INTERVAL`     | 60      | The polling interval in minutes.                                            |
+| `EXEC_INTERVAL`     | 1       | The execution interval in minutes.                                          |
+| `POLL_THREADS`      | 4       | Number of threads for polling annotations.                                  |
+| `EXEC_THREADS`      | 10      | Number of threads for executing scaling operations.                         |
+| `EXCLUDE_NAMESPACES`| (empty) | Comma-separated list of namespaces to exclude from processing.              |
+
+
 
