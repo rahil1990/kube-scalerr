@@ -18,15 +18,19 @@ Polling Loop: Fetches all Deployments and StatefulSets in the cluster and checks
 
 Scaling Loop: Every minute, the controller checks the CSV file for workloads scheduled to scale at the current time and performs scaling operations accordingly.
 
-Custom Annotations
+## Custom Annotations
+
 Workloads can be annotated with the following keys:
 
-scaleup_time: The time in UTC when the resource should be scaled up. Format: HH-MM (e.g., 14-30 for 2:30 PM UTC).
-scaleup_replicas: The number of replicas to scale up to at the specified scaleup_time.
-scaledown_time: The time in UTC when the resource should be scaled down. Format: HH-MM.
-scaledown_replicas: The number of replicas to scale down to at the specified scaledown_time.
-weekend_scaleup: Set to on or off to enable or disable scaling on weekends (default: off).
-fixed_scaleup: If defined, overrides scaleup_replicas with this fixed value.
+| Annotation            | Description                                                                                   |
+| --------------------- | --------------------------------------------------------------------------------------------- |
+| `scaleup_time`        | The time in UTC when the resource should be scaled up. Format: `HH-MM` (e.g., `14-30`).        |
+| `scaleup_replicas`    | The number of replicas to scale up to at the specified `scaleup_time`.                         |
+| `scaledown_time`      | The time in UTC when the resource should be scaled down. Format: `HH-MM`.                      |
+| `scaledown_replicas`  | The number of replicas to scale down to at the specified `scaledown_time`.                     |
+| `weekend_scaleup`     | Set to `on` or `off` to enable or disable scaling on weekends (default: `off`).                |
+| `fixed_scaleup`       | If defined, overrides `scaleup_replicas` with this fixed value.                                |
+
 
 ## Environment Variables
 
