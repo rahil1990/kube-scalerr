@@ -1,5 +1,5 @@
 # kube-scalerr
-Kubernetes workload scaleing controller
+Kubernetes workload scaling controller
 
 This is an open-source Kubernetes controller that automatically scales Deployments and StatefulSets based on custom annotations in the workloads. The controller periodically checks for annotations that specify scale-up and scale-down times, and adjusts replicas accordingly.
 
